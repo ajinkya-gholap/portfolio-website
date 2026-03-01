@@ -9,27 +9,57 @@ const Contact: React.FC = () => {
     email: '',
     message: ''
   });
+  const [status, setStatus] = React.useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       alert('Please fill in all fields');
       return;
     }
 
-    const subject = `Portfolio Contact from ${formData.name}`;
-    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-    
-    window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
-    
-    // Optional: Reset form or show success message
-    alert('Thank you! Your default email client should open now.');
-    setFormData({ name: '', email: '', message: '' });
+    setStatus('sending');
+
+    try {
+      // Using Web3Forms for direct email sending
+      // Note: Replacing YOUR_ACCESS_KEY_HERE with a real key from https://web3forms.com/
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: "830cc8c4-9cbf-46fd-9754-cbce647fa81d", // Replace with your actual Web3Forms access key
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `Portfolio Contact from ${formData.name}`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        alert('Thank you! Your message has been sent successfully.');
+      } else {
+        setStatus('error');
+        alert('Something went wrong. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setStatus('error');
+      alert('Error sending message. Please check your internet connection and try again.');
+    } finally {
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   return (
@@ -43,45 +73,47 @@ const Contact: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your name" 
+              placeholder="Enter your name"
               className="w-full px-8 py-5 rounded-full bg-white dark:bg-gray-800 border-transparent focus:border-orange-600 focus:ring-0 text-gray-900 dark:text-white font-medium transition-all shadow-sm outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
             />
-            <input 
-              type="email" 
+            <input
+              type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email" 
+              placeholder="Enter your email"
               className="w-full px-8 py-5 rounded-full bg-white dark:bg-gray-800 border-transparent focus:border-orange-600 focus:ring-0 text-gray-900 dark:text-white font-medium transition-all shadow-sm outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
             />
           </div>
-          <textarea 
-            rows={5} 
+          <textarea
+            rows={5}
             name="message"
             value={formData.message}
             onChange={handleChange}
             placeholder="How can I help you?"
             className="w-full px-8 py-6 rounded-[2rem] bg-white dark:bg-gray-800 border-transparent focus:border-orange-600 focus:ring-0 text-gray-900 dark:text-white font-medium transition-all shadow-sm outline-none resize-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
           ></textarea>
-          <button className="w-full py-5 bg-black dark:bg-orange-600 text-white rounded-full text-xl font-bold hover:bg-orange-600 dark:hover:bg-orange-700 transition-all shadow-xl active:scale-95">
-            Send message
+          <button
+            type="submit"
+            disabled={status === 'sending'}
+            className={`w-full py-5 bg-black dark:bg-orange-600 text-white rounded-full text-xl font-bold hover:bg-orange-600 dark:hover:bg-orange-700 transition-all shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed`}
+          >
+            {status === 'sending' ? 'Sending...' : 'Send message'}
           </button>
         </form>
 
         <div className="mt-16 pt-12 border-t border-gray-100 flex flex-col items-center space-y-4">
           <p className="text-gray-400 font-bold uppercase tracking-widest text-sm">Let's Connect</p>
           <div className="flex flex-col space-y-2">
-            <a href={`tel:${PERSONAL_INFO.phone}`} className="text-2xl font-bold text-gray-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-500 transition-colors">
+            <a href={`tel:${PERSONAL_INFO.phone}`} className="text-3xl font-bold text-gray-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-500 transition-colors">
               {PERSONAL_INFO.phone}
             </a>
-            <a href={`mailto:${PERSONAL_INFO.email}`} className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white hover:text-orange-600 dark:hover:text-orange-500 transition-colors break-all">
-              {PERSONAL_INFO.email}
-            </a>
+
           </div>
         </div>
       </div>

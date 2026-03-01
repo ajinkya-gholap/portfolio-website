@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
           ))}
           <div className="pt-4 px-2">
             <a
-              href={`mailto:${PERSONAL_INFO.email}`}
+              href={`https://www.naukri.com/mnjuser/profile?id=&altresid`}
               onClick={() => setIsOpen(false)}
               className="block w-full text-center bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-4 rounded-2xl font-black text-lg"
             >

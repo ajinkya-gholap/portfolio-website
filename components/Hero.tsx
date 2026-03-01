@@ -33,15 +33,15 @@ const Hero: React.FC = () => {
     <div ref={containerRef} className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#FDFDFD] dark:bg-gray-950 transition-colors duration-300">
       {/* Background Decorative Element */}
       <div className="absolute top-1/4 right-0 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-to-l from-orange-50/50 to-transparent dark:from-orange-900/10 rounded-full blur-3xl -z-10"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Profile Info */}
           <div className={`lg:col-span-4 flex flex-col items-center lg:items-start space-y-6 reveal ${isVisible ? 'active' : ''}`}>
             <div className="relative">
               <div className="w-56 h-64 md:w-64 md:h-72 rounded-[2.5rem] overflow-hidden bg-gray-200 dark:bg-gray-800 shadow-2xl ring-8 ring-white dark:ring-gray-800 transform -rotate-3 hover:rotate-0 transition-all duration-500">
-                <img 
+                <img
                   src={"img/Ajinkya1.jpg"}
                   alt={PERSONAL_INFO.name}
                   className="w-full h-full object-cover object-top"
@@ -54,12 +54,12 @@ const Hero: React.FC = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="text-center lg:text-left pt-4">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">{PERSONAL_INFO.name}</h2>
               <p className="text-orange-600 font-semibold uppercase tracking-widest text-sm">{PERSONAL_INFO.role}</p>
               <div className="flex justify-center lg:justify-start space-x-5 mt-6">
-                <a href={PERSONAL_INFO.linkedin} className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md text-gray-400 hover:text-orange-600 hover:shadow-lg transition-all">
+                <a href={PERSONAL_INFO.linkedin} target='_blank' className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md text-gray-400 hover:text-orange-600 hover:shadow-lg transition-all">
                   <Linkedin size={18} />
                 </a>
                 <a href={`mailto:${PERSONAL_INFO.email}`} className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md text-gray-400 hover:text-orange-600 hover:shadow-lg transition-all">
@@ -85,15 +85,15 @@ const Hero: React.FC = () => {
             </p> */}
 
             <div className={`flex flex-wrap items-center gap-8 pt-4 reveal delay-400 ${isVisible ? 'active' : ''}`}>
-              <a 
-                href="#projects" 
+              <a
+                href="#projects"
                 className="group flex items-center space-x-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-10 py-5 rounded-full text-lg font-bold hover:bg-orange-600 dark:hover:bg-orange-500 hover:text-white transition-all shadow-2xl hover:-translate-y-1"
               >
                 <span>Discover Work</span>
                 <ArrowDownRight className="group-hover:rotate-45 transition-transform" />
               </a>
               <div className="hidden sm:block text-sm font-black text-gray-300 dark:text-gray-600 uppercase tracking-[0.2em] border-l-2 border-gray-100 dark:border-gray-800 pl-8">
-                Full Stack<br/>Developer
+                Full Stack<br />Developer
               </div>
             </div>
           </div>

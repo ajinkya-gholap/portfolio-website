@@ -25,10 +25,10 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 px-4 pt-6 pointer-events-none">
-      <nav 
+      <nav
         className={`mx-auto max-w-5xl transition-all duration-500 ease-in-out pointer-events-auto
-          ${isScrolled 
-            ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border border-white/20 dark:border-gray-700/30 shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-full py-2 px-3' 
+          ${isScrolled
+            ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border border-white/20 dark:border-gray-700/30 shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-full py-2 px-3'
             : 'bg-white/40 dark:bg-gray-900/40 backdrop-blur-md border border-white/10 dark:border-gray-700/10 shadow-sm rounded-full py-3 px-4'
           }`}
       >
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
               Ajinkya <span className="text-orange-600">G.</span>
             </span>
           </div>
-          
+
           {/* Desktop Links */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-1 lg:space-x-4">
@@ -62,7 +62,8 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             <a
-              href={`mailto:${PERSONAL_INFO.email}`}
+              href={`https://www.naukri.com/mnjuser/profile?id=&altresid`}
+              target="_blank"
               className="hidden sm:inline-flex bg-gray-950 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-200 active:scale-95"
             >
               Hire Me
@@ -80,7 +81,7 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div 
+      <div
         className={`md:hidden absolute top-24 left-4 right-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-100 dark:border-gray-800 shadow-2xl rounded-3xl overflow-hidden transition-all duration-300 ease-out
           ${isOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-4 pointer-events-none invisible'}`}
       >

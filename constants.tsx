@@ -10,6 +10,7 @@ export const PERSONAL_INFO = {
   phone: "+91-8484981685",
   linkedin: "https://linkedin.com/in/ajinkya-gholap",
   github: "https://github.com/ajinkya-gholap",
+  instagram: "https://instagram.com/_ajinkya2002",
   location: "Amravati, India",
   profile: "Final-year MCA student with strong knowledge of Java, SQL, web development technologies. Actively seeking an entry-level Java Developer role to apply skills and grow in a professional environment."
 };
